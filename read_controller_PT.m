@@ -1,8 +1,9 @@
-function [Time, Voltage] = read_controller_PT(Handle_arr)
+function [Time, Voltage] = read_controller_PT(Handle_arr, time_length)
 
+FS_MODULE = 7812.5;
 
 disp("started reading data")
-points = 5000; % TODO: stop hard coding
+points = round(time_length*FS_MODULE);
 
 Voltage = zeros(points, length(Handle_arr));
 Time = zeros(points, length(Handle_arr));
@@ -13,7 +14,7 @@ for device_num = 1: length(Handle_arr)
         values(i,:) = fread(handle, 6, 'uint8');
     end
 
-    t_init = values(1,2);
+    t_init = values(1,2); % first inclement number of time
     t_base = 0;
     for i=2:points
         if(values(i,2)==0)
@@ -24,7 +25,7 @@ for device_num = 1: length(Handle_arr)
         r(i) = values(i,5) + values(i,6)*255;
     end
     Voltage(:, device_num) = l - r;
-    Time(:, device_num) = t;
+    Time(:, device_num) = t/FS_MODULE;
 
 
 end

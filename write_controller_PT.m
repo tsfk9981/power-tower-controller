@@ -21,8 +21,8 @@ for sample_num = 1:length(output_vector(:, 1))
         % Write sequentially
         tx(handle, unit, 'O', output_vector(sample_num, device_num));
         
-        t = t + period;
     end
+    t = t + period;
 
     while(toc < t); end
 end

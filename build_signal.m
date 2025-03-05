@@ -47,9 +47,8 @@ sine_vector_2 = [sine; zero_pad];
 % output_signal = [output_signal(:, 1); sine_vector_1];
 output_signal = [output_signal(:, 1)];
 
-Output = repmat(output_signal, 1, device_num);
 
-Time = linspace(0, (length(Output) - 1)/sample_rate, length(Output));
+Time = linspace(0, (length(output_signal) - 1)/sample_rate, length(output_signal));
 
 figure(100)
 hold on
@@ -58,5 +57,8 @@ grid on
 box on
 xlabel('Time (s)')
 ylabel('Voltage (kV)')
+
+
+Output = repmat(output_signal, 1, device_num);
 
 end

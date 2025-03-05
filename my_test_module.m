@@ -4,7 +4,7 @@ close all;
 max_voltage = 3000;
 FS = 500;
 
-Ports = ["COM16", "COM4"];
+Ports = ["COM5"];
 
 Input = build_signal(max_voltage, FS, length(Ports));
 
@@ -18,7 +18,7 @@ start_controller_PT(h) % start to stream data from the device
 write_controller_PT(h, Input, FS);
 stop_controller_PT(h);
 
-[Time, Voltage_out] = read_controller_PT(h);
+[Time, Voltage_out] = read_controller_PT(h, length(Input)/FS);
 close_controller_PT(h);
 
 
