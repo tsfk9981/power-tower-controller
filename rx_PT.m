@@ -12,7 +12,7 @@
 %   DATA    is an N-element 16-bit array 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function data = rx(handle, unit, cmd, size)
+function data = rx_PT(handle, unit, cmd, size)
     fwrite(handle, [int8(unit), int8(cmd)]);
     data = fread(handle, size, 'int16');
 return

@@ -1,9 +1,5 @@
-function Handle_arr = open_controller_PT(Port_arr)
+function Handle_arr = open_PT(Port_arr, Option_arr, Parameter_arr)
 
-% Port_arr = ["COM16", "COM4"];
-ADC_FILTER = 700;
-DEAD_BAND = 0;
-P_GAIN = 60; % 1/P_GAIN
 
 unit = 0; % 0: direct communication to the unit without the SLID
 
@@ -15,20 +11,23 @@ for i = 1: length(Port_arr)
     handle = serialport(port,9600);
 
     % Calibrate with no voltage
-    tx(handle, unit, 'C')
+    tx_PT(handle, unit, 'C')
+    
+    if exist("Option_arr", "var")
+        for j = 1: length(Option_arr)
+            option_char = char(Option_arr(j));
+            parameter_value = Parameter_arr(j);
 
-    % Set ADC filtering
-    tx(handle, unit, 'F', ADC_FILTER);
-
-    % Set deadband
-    tx(handle, unit, 'D', DEAD_BAND);
-
-    % Set gain
-    tx(handle, unit, 'G', P_GAIN);
-
+            tx_PT(handle, unit, option_char, parameter_value);
+        end
+    end
+    
     % Start close loop mode and set 0 volte
-    tx(handle, unit, 'O', 0);
+    tx_PT(handle, unit, 'O', 0);
 
     Handle_arr(i) = handle;
 end
+
+disp("PT: connected")
+disp("PT: HV ON !!")
 end

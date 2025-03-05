@@ -6,7 +6,7 @@
 %   HANDLE is the serial-port ID from OPEN_CONTROLLER.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function stop_controller_PT(Handle_arr)
+function stop_PT(Handle_arr)
 
 unit = 0;
 
@@ -14,13 +14,16 @@ for i = 1: length(Handle_arr)
     handle = Handle_arr(i);
 
     % pause data streaming
-    tx(handle, unit, 'P');
+    tx_PT(handle, unit, 'P');
 
     % Turn off h-bridge
-    tx(handle, unit, 'S', 0);
+    tx_PT(handle, unit, 'S', 0); % actually changing into switch mode and both switch open
 
     % Turn off output control
-    tx(handle, unit, 'X');
+    tx_PT(handle, unit, 'X');
 
 
 end
+
+disp("PT: finished data streaming")
+disp("PT: HV OFF!!")
