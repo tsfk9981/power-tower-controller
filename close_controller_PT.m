@@ -6,7 +6,7 @@
 %   HANDLE is the serial-port ID from OPEN_CONTROLLER.
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function close_controller_v2(handle_array)
+function close_controller_PT(handle_array)
 if verLessThan('matlab', '9.9')
     % Close serial communication for each element in handle_array
     for i = 1:length(handle_array)
@@ -16,4 +16,7 @@ else
     for i = 1:length(handle_array)
     delete(handle_array(i));
     end 
+end
+disp("closed device")
+
 end
