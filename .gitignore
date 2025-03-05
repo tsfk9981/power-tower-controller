@@ -1,0 +1,28 @@
+# Ignore MATLAB and Simulink generated files
+*.asv
+*.m~
+*.mlx~
+*.slx.autosave
+*.mdl.autosave
+*.slxc
+*.slxp
+*.slx.recover
+*.mdl.recover
+*.mex*
+*.log
+*.out
+*.jou
+*.rpt
+*.bak
+*.sv
+*.sldd.autosave
+*.sldd.recover
+*.slxc
+*.slx.recover
+*.mdl.recover
+*.autosave
+
+# Ignore Simulink cache and code generation folders
+slprj/
+simulink_cache/
+codegen/
